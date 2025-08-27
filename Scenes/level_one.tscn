@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://don3s8tbj4gwx"]
+
+[ext_resource type="PackedScene" uid="uid://050fh0mgwxrh" path="res://Scenes/player_node.tscn" id="1_lvfns"]
+[ext_resource type="PackedScene" uid="uid://byn7mpye6ojhr" path="res://Scenes/floor_tile.tscn" id="2_sojq8"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player_Node" parent="." instance=ExtResource("1_lvfns")]
+position = Vector2(83, 429)
+
+[node name="Camera2D" type="Camera2D" parent="Player_Node"]
+position = Vector2(0, -166)
+
+[node name="floor_tile" parent="." instance=ExtResource("2_sojq8")]
+position = Vector2(94, 537)
+
+[node name="floor_tile2" parent="." instance=ExtResource("2_sojq8")]
+position = Vector2(494, 540)
+
+[node name="floor_tile3" parent="." instance=ExtResource("2_sojq8")]
+position = Vector2(299, 145)

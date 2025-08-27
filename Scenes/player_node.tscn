@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://050fh0mgwxrh"]
+
+[ext_resource type="Script" uid="uid://cw6cl20h6dkfo" path="res://Scenes/character_body_2d.gd" id="1_dm0xv"]
+[ext_resource type="Texture2D" uid="uid://bo7fthsfixlud" path="res://Sprites/scifiUnit_01.png" id="1_ln5bw"]
+[ext_resource type="Script" uid="uid://cca8byf31pi57" path="res://Scenes/grapple_controller.gd" id="3_nbi4f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm0xv"]
+size = Vector2(32, 48)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_dm0xv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dm0xv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ln5bw")
+
+[node name="Grapple_Controller" type="Node2D" parent="."]
+script = ExtResource("3_nbi4f")
+
+[node name="RayCast2D" type="RayCast2D" parent="Grapple_Controller"]
+target_position = Vector2(800, 0)
+
+[node name="Line2D" type="Line2D" parent="Grapple_Controller"]
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(0.374383, 5.05373e-07, 1.68458e-07, 1)
+
+[node name="Timer" type="Timer" parent="Grapple_Controller"]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="Grapple_Controller/Timer" to="Grapple_Controller" method="_on_timer_timeout"]
