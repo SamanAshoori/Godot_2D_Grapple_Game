@@ -24,3 +24,10 @@ func _physics_process(delta: float) -> void:
 		velocity.x =lerp(velocity.x, 0.0 ,DECELERATION)
 
 	move_and_slide()
+
+func kill_player():
+	position = %RespawnPoint.position
+	print('test')
+
+func _on_death_zone_body_entered(body: Node2D) -> void:
+	kill_player()
