@@ -20,9 +20,14 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("move_left", "move_right")
 	if direction:
 		velocity.x = lerp(velocity.x, SPEED * direction,ACCELERATION)
+		if velocity.x > 0:
+			$Sprite2D.flip_h = false
+		else:
+			$Sprite2D.flip_h = true
 	else:
 		velocity.x =lerp(velocity.x, 0.0 ,DECELERATION)
-
+	
+	
 	move_and_slide()
 
 func kill_player():
