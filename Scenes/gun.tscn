@@ -8,3 +8,6 @@ script = ExtResource("1_oqrbh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_nxj5y")
+
+[node name="muzzle" type="Marker2D" parent="."]
+position = Vector2(6, 0)
