@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://don3s8tbj4gwx"]
+[gd_scene load_steps=12 format=3 uid="uid://don3s8tbj4gwx"]
 
 [ext_resource type="PackedScene" uid="uid://050fh0mgwxrh" path="res://Scenes/player_node.tscn" id="1_lvfns"]
 [ext_resource type="Texture2D" uid="uid://olbo8olfp65k" path="res://Sprites/Mine Sprites/3_Mine_Tileset_1_FarBackground.png" id="2_hi7j2"]
 [ext_resource type="Texture2D" uid="uid://b6jdblfrhq4yb" path="res://Sprites/Mine Sprites/1_Mine_Props_1.png" id="3_b7vm3"]
 [ext_resource type="Texture2D" uid="uid://d2l26onuastch" path="res://Sprites/Mine Sprites/1_Mine_Tileset_1.png" id="3_hi7j2"]
 [ext_resource type="PackedScene" uid="uid://li8d1gf4b4y5" path="res://Scenes/enemy.tscn" id="4_ik1yt"]
+[ext_resource type="PackedScene" uid="uid://crvku4pqpbg36" path="res://Scenes/ruby.tscn" id="6_gni6d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ik1yt"]
 texture = ExtResource("3_hi7j2")
@@ -692,5 +693,8 @@ shape = SubResource("WorldBoundaryShape2D_b7vm3")
 [node name="RespawnPoint" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(83, 350)
+
+[node name="Ruby" parent="." instance=ExtResource("6_gni6d")]
+position = Vector2(729, 363)
 
 [connection signal="body_entered" from="Death Zone" to="Player_Node" method="_on_death_zone_body_entered"]

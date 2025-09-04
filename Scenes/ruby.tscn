@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://crvku4pqpbg36"]
+
+[ext_resource type="Texture2D" uid="uid://di7pclluob4hc" path="res://Sprites/ore_ruby.png" id="1_5m5tw"]
+[ext_resource type="Script" uid="uid://mfa63lpbpvth" path="res://Scenes/ruby.gd" id="2_g3vks"]
+
+[node name="Ruby" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_5m5tw")
+script = ExtResource("2_g3vks")
