@@ -694,7 +694,7 @@ shape = SubResource("WorldBoundaryShape2D_b7vm3")
 unique_name_in_owner = true
 position = Vector2(83, 350)
 
-[node name="Ruby" parent="." instance=ExtResource("6_gni6d")]
-position = Vector2(729, 363)
+[node name="Ruby2" parent="." instance=ExtResource("6_gni6d")]
+position = Vector2(729, 364)
 
 [connection signal="body_entered" from="Death Zone" to="Player_Node" method="_on_death_zone_body_entered"]

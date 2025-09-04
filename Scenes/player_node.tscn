@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://050fh0mgwxrh"]
+[gd_scene load_steps=18 format=3 uid="uid://050fh0mgwxrh"]
 
 [ext_resource type="Script" uid="uid://cw6cl20h6dkfo" path="res://Scenes/character_body_2d.gd" id="1_dm0xv"]
 [ext_resource type="Texture2D" uid="uid://s6xm3awwlcl6" path="res://Sprites/player/cyborg/Biker_idle.png" id="2_a8sby"]
@@ -7,23 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://bt6e4a68hll7c" path="res://Scenes/gun.tscn" id="4_a8sby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dm0xv"]
-size = Vector2(15, 28)
+size = Vector2(17, 29)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_67j28"]
 atlas = ExtResource("2_a8sby")
-region = Rect2(0, 0, 48, 48)
+region = Rect2(98, 11, 23, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ofm4f"]
 atlas = ExtResource("2_a8sby")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k3j84"]
-atlas = ExtResource("2_a8sby")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g0med"]
-atlas = ExtResource("2_a8sby")
-region = Rect2(144, 0, 48, 48)
+region = Rect2(144, 11, 23, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bphjq"]
 atlas = ExtResource("3_67j28")
@@ -57,12 +49,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ofm4f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k3j84")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g0med")
 }],
 "loop": true,
 "name": &"idle",
@@ -106,10 +92,12 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_dm0xv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6.5, 8)
+position = Vector2(5, 3)
 shape = SubResource("RectangleShape2D_dm0xv")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
@@ -125,7 +113,7 @@ libraries = {
 }
 
 [node name="Grapple_Controller" type="Node2D" parent="."]
-position = Vector2(-13, 11)
+position = Vector2(-2, 5)
 script = ExtResource("3_nbi4f")
 
 [node name="RayCast2D" type="RayCast2D" parent="Grapple_Controller"]
@@ -141,6 +129,6 @@ wait_time = 0.3
 one_shot = true
 
 [node name="Gun" parent="." instance=ExtResource("4_a8sby")]
-position = Vector2(8, 10)
+position = Vector2(6, -10)
 
 [connection signal="timeout" from="Grapple_Controller/Timer" to="Grapple_Controller" method="_on_timer_timeout"]
