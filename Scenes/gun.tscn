@@ -11,7 +11,7 @@ position = Vector2(11, 0)
 
 [node name="gun_fire" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_oqrbh")
-volume_db = -2.0
+volume_db = -10.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
