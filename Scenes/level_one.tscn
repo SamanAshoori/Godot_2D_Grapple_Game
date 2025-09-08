@@ -682,7 +682,7 @@ position = Vector2(83, 351)
 limit_bottom = 500
 
 [node name="enemy" parent="." instance=ExtResource("4_ik1yt")]
-position = Vector2(488, 369)
+position = Vector2(493, 359)
 
 [node name="Death Zone" type="Area2D" parent="."]
 
@@ -696,5 +696,8 @@ position = Vector2(83, 350)
 
 [node name="Ruby2" parent="." instance=ExtResource("6_gni6d")]
 position = Vector2(729, 364)
+
+[node name="enemy2" parent="." instance=ExtResource("4_ik1yt")]
+position = Vector2(674, 358)
 
 [connection signal="body_entered" from="Death Zone" to="Player_Node" method="_on_death_zone_body_entered"]

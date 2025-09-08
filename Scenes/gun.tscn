@@ -1,9 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt6e4a68hll7c"]
+[gd_scene load_steps=3 format=3 uid="uid://bt6e4a68hll7c"]
 
 [ext_resource type="Script" uid="uid://tqxkno016x0i" path="res://Scenes/gun.gd" id="1_oqrbh"]
+[ext_resource type="AudioStream" uid="uid://dfguuhi6yfmn2" path="res://audio/laserRetro_000.ogg" id="2_oqrbh"]
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_oqrbh")
 
 [node name="muzzle" type="Marker2D" parent="."]
 position = Vector2(11, 0)
+
+[node name="gun_fire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_oqrbh")
+volume_db = -2.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

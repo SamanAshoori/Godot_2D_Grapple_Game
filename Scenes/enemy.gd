@@ -6,6 +6,9 @@ var canSwitch = true
 
 func _physics_process(delta: float) -> void:
 	
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 	
 	if !$RayCast2D.is_colliding() and canSwitch:
 		moving_right *= -1

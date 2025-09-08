@@ -34,6 +34,7 @@ func _physics_process(delta: float) -> void:
 
 func kill_player():
 	position = %RespawnPoint.position
+	get_tree().reload_current_scene()
 	print('player_died')
 
 func _on_death_zone_body_entered(body: Node2D) -> void:
