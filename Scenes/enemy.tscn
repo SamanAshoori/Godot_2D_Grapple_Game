@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://li8d1gf4b4y5"]
+[gd_scene load_steps=23 format=3 uid="uid://li8d1gf4b4y5"]
 
 [ext_resource type="Script" uid="uid://cyoha5rmvemwf" path="res://Scenes/enemy.gd" id="1_afpow"]
 [ext_resource type="Texture2D" uid="uid://cqrcxs8lqacw3" path="res://Sprites/enemy/Anim_Robot_Idle1_v1.1_spritesheet.png" id="1_hghv2"]
 [ext_resource type="Texture2D" uid="uid://b0ht1vw14tdel" path="res://Sprites/enemy/Anim_Robot_Walk1_v1.1_spritesheet.png" id="2_1f0kj"]
+[ext_resource type="AudioStream" uid="uid://okhy07xpjwff" path="res://audio/explosionCrunch_000.ogg" id="4_287tu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1f0kj"]
 atlas = ExtResource("1_hghv2")
@@ -131,6 +132,11 @@ size = Vector2(17, 31)
 [node name="enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_afpow")
 
+[node name="death_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_287tu")
+volume_db = -10.0
+max_distance = 6050.0
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4.76837e-07)
 sprite_frames = SubResource("SpriteFrames_haro7")
@@ -149,4 +155,5 @@ shape = SubResource("RectangleShape2D_1f0kj")
 position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_afpow")
 
+[connection signal="finished" from="death_sound" to="." method="_on_death_sound_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

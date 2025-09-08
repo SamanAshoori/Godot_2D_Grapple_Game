@@ -30,8 +30,25 @@ func _physics_process(delta: float) -> void:
 	
 
 func kill_enemy():
-	queue_free()
+	#This is some spaghetti ass shit in order to make sure that
+	#the player doesnt get stuck nor die while waiting for sound to end
+	#fun
+	$death_sound.play()
+	$".".visible = false
+	$".".collision_mask = 2
+	$".".collision_layer = 2
+	$Area2D/CollisionShape2D.disabled = true
+	$CollisionShape2D.disabled = true
+	$Area2D.monitoring = false
+	$Area2D.collision_layer = 2
+	$Area2D.collision_mask = 2
+	print("kill_enemy() started")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group('player'):
 		body.kill_player() # Replace with function body.
+
+
+func _on_death_sound_finished() -> void:
+	print("Death sound finished, queuing for deletion")
+	queue_free() # Replace with function body.
