@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+var Health = 30
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 const ACCELERATION = 0.1
@@ -10,6 +10,10 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		
+	#Handle 0 Health
+	if Health == 0:
+		kill_player()
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -30,7 +34,11 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-	
+func player_hit():
+	Health -= 10;
+	$".".set_modulate('RED')
+	print(Health)
+	$Hit_timer.start()
 
 func kill_player():
 	position = %RespawnPoint.position
@@ -41,3 +49,7 @@ func kill_player():
 func _on_death_zone_body_entered(body: Node2D) -> void:
 	kill_player()
 	
+
+
+func _on_hit_timer_timeout() -> void:
+	$".".set_modulate('#ffffff') # Replace with function body.

@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://li8d1gf4b4y5"]
 
-[ext_resource type="Script" uid="uid://cyoha5rmvemwf" path="res://Scenes/enemy.gd" id="1_afpow"]
+[ext_resource type="Script" uid="uid://cyoha5rmvemwf" path="res://Scenes/scripts/enemy.gd" id="1_afpow"]
 [ext_resource type="Texture2D" uid="uid://cqrcxs8lqacw3" path="res://Sprites/enemy/Anim_Robot_Idle1_v1.1_spritesheet.png" id="1_hghv2"]
 [ext_resource type="Texture2D" uid="uid://b0ht1vw14tdel" path="res://Sprites/enemy/Anim_Robot_Walk1_v1.1_spritesheet.png" id="2_1f0kj"]
 [ext_resource type="AudioStream" uid="uid://okhy07xpjwff" path="res://audio/explosionCrunch_000.ogg" id="4_287tu"]

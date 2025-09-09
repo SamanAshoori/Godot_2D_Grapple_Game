@@ -35,18 +35,18 @@ func kill_enemy():
 	#fun
 	$death_sound.play()
 	$".".visible = false
-	$".".collision_mask = 2
-	$".".collision_layer = 2
+	$".".collision_mask = 3
+	$".".collision_layer = 3
 	$Area2D/CollisionShape2D.disabled = true
 	$CollisionShape2D.disabled = true
 	$Area2D.monitoring = false
-	$Area2D.collision_layer = 2
-	$Area2D.collision_mask = 2
+	$Area2D.collision_layer = 3
+	$Area2D.collision_mask = 3
 	print("kill_enemy() started")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group('player'):
-		body.kill_player() # Replace with function body.
+		body.player_hit() #player loses 10hp
 
 
 func _on_death_sound_finished() -> void:

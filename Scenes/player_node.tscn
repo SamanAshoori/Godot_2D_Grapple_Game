@@ -1,13 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://050fh0mgwxrh"]
+[gd_scene load_steps=11 format=3 uid="uid://050fh0mgwxrh"]
 
-[ext_resource type="Script" uid="uid://cw6cl20h6dkfo" path="res://Scenes/character_body_2d.gd" id="1_dm0xv"]
+[ext_resource type="Script" uid="uid://cw6cl20h6dkfo" path="res://Scenes/scripts/character_body_2d.gd" id="1_dm0xv"]
 [ext_resource type="Texture2D" uid="uid://s6xm3awwlcl6" path="res://Sprites/player/cyborg/Biker_idle.png" id="2_a8sby"]
-[ext_resource type="Texture2D" uid="uid://oals8wjhb7tx" path="res://Sprites/player/cyborg/Biker_run.png" id="3_67j28"]
-[ext_resource type="Script" uid="uid://cca8byf31pi57" path="res://Scenes/grapple_controller.gd" id="3_nbi4f"]
+[ext_resource type="Script" uid="uid://cca8byf31pi57" path="res://Scenes/scripts/grapple_controller.gd" id="3_nbi4f"]
 [ext_resource type="PackedScene" uid="uid://bt6e4a68hll7c" path="res://Scenes/gun.tscn" id="4_a8sby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dm0xv"]
-size = Vector2(17, 29)
+size = Vector2(17, 32.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_67j28"]
 atlas = ExtResource("2_a8sby")
@@ -16,30 +15,6 @@ region = Rect2(98, 11, 23, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ofm4f"]
 atlas = ExtResource("2_a8sby")
 region = Rect2(144, 11, 23, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bphjq"]
-atlas = ExtResource("3_67j28")
-region = Rect2(0, 0, 46, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7vt5t"]
-atlas = ExtResource("3_67j28")
-region = Rect2(46, 0, 46, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ypi3"]
-atlas = ExtResource("3_67j28")
-region = Rect2(92, 0, 46, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qdo16"]
-atlas = ExtResource("3_67j28")
-region = Rect2(138, 0, 46, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h0nwd"]
-atlas = ExtResource("3_67j28")
-region = Rect2(184, 0, 46, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3a7eg"]
-atlas = ExtResource("3_67j28")
-region = Rect2(230, 0, 46, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bphjq"]
 animations = [{
@@ -52,34 +27,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bphjq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7vt5t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0ypi3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qdo16")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h0nwd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3a7eg")
-}],
-"loop": true,
-"name": &"walk",
 "speed": 5.0
 }]
 
@@ -97,15 +44,14 @@ collision_mask = 3
 script = ExtResource("1_dm0xv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, 3)
+position = Vector2(0, 1.75)
 shape = SubResource("RectangleShape2D_dm0xv")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(5, -1)
+position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_bphjq")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.915202
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -113,7 +59,7 @@ libraries = {
 }
 
 [node name="Grapple_Controller" type="Node2D" parent="."]
-position = Vector2(-2, 5)
+position = Vector2(-5, 6)
 script = ExtResource("3_nbi4f")
 
 [node name="RayCast2D" type="RayCast2D" parent="Grapple_Controller"]
@@ -129,6 +75,10 @@ wait_time = 0.3
 one_shot = true
 
 [node name="Gun" parent="." instance=ExtResource("4_a8sby")]
-position = Vector2(6, -10)
+position = Vector2(2, -8)
+
+[node name="Hit_timer" type="Timer" parent="."]
+wait_time = 0.5
 
 [connection signal="timeout" from="Grapple_Controller/Timer" to="Grapple_Controller" method="_on_timer_timeout"]
+[connection signal="timeout" from="Hit_timer" to="." method="_on_hit_timer_timeout"]

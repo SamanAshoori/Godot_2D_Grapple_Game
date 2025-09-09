@@ -1,5 +1,5 @@
 extends Node2D
-const BULLET = preload("bullet.tscn")
+const BULLET = preload("res://Scenes/bullet.tscn")
 @onready var muzzle: Marker2D = $muzzle
 @onready var timer := $Timer
 var is_ready: bool = true
