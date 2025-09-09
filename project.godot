@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="2d_Portal"
+config/name="2D_Grapple"
 run/main_scene="uid://don3s8tbj4gwx"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
@@ -18,6 +18,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://Global.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [global_group]
 
