@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://050fh0mgwxrh"]
+[gd_scene load_steps=12 format=3 uid="uid://050fh0mgwxrh"]
 
 [ext_resource type="Script" uid="uid://cw6cl20h6dkfo" path="res://Scenes/scripts/character_body_2d.gd" id="1_dm0xv"]
 [ext_resource type="Texture2D" uid="uid://s6xm3awwlcl6" path="res://Sprites/player/cyborg/Biker_idle.png" id="2_a8sby"]
 [ext_resource type="Script" uid="uid://cca8byf31pi57" path="res://Scenes/scripts/grapple_controller.gd" id="3_nbi4f"]
 [ext_resource type="PackedScene" uid="uid://bt6e4a68hll7c" path="res://Scenes/gun.tscn" id="4_a8sby"]
+[ext_resource type="PackedScene" uid="uid://jttm5vy30tnl" path="res://Scenes/health_bar.tscn" id="5_67j28"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dm0xv"]
 size = Vector2(17, 32.5)
@@ -79,6 +80,9 @@ position = Vector2(2, -8)
 
 [node name="Hit_timer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="HealthBar" parent="." instance=ExtResource("5_67j28")]
+position = Vector2(-8, -21)
 
 [connection signal="timeout" from="Grapple_Controller/Timer" to="Grapple_Controller" method="_on_timer_timeout"]
 [connection signal="timeout" from="Hit_timer" to="." method="_on_hit_timer_timeout"]

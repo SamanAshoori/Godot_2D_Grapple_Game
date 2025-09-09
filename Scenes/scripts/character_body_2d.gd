@@ -14,6 +14,7 @@ func _physics_process(delta: float) -> void:
 	#Handle 0 Health
 	if Health == 0:
 		kill_player()
+	$HealthBar.set_value(Health)
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
