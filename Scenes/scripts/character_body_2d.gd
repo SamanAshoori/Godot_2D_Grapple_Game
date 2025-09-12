@@ -5,10 +5,25 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 const ACCELERATION = 0.1
 const DECELERATION = 0.1
-
+@onready var Sprite = $Sprite2D
 func _physics_process(delta: float) -> void:
+	
+	#get mouse_pos
+	var mouse_pos = get_global_mouse_position()
+	
+	if mouse_pos.x > global_position.x:
+		#mouse on right
+		$Gun.position = Vector2(7, -7)
+		Sprite.flip_h = false
+	else:
+		$Gun.position = Vector2(-14, -7)
+		Sprite.flip_h = true
+		
+	
+	
 	# Add the gravity.
 	if not is_on_floor():
+		Sprite.play('jump')
 		velocity += get_gravity() * delta
 		
 	#Handle 0 Health
@@ -26,10 +41,15 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = lerp(velocity.x, SPEED * direction,ACCELERATION)
 		if velocity.x > 0:
-			$Sprite2D.flip_h = false
+			Sprite.play("run")
+			$Gun.position = Vector2(7, -7)
+			Sprite.flip_h = false
 		else:
-			$Sprite2D.flip_h = true
+			Sprite.play("run")
+			$Gun.position = Vector2(-14, -7)
+			Sprite.flip_h = true
 	else:
+		Sprite.play('idle')
 		velocity.x =lerp(velocity.x, 0.0 ,DECELERATION)
 	
 	

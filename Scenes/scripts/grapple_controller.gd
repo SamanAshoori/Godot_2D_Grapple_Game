@@ -10,7 +10,7 @@ extends Node2D
 @onready var rope := $Line2D
 @onready var timer := $Timer
 var launched = false
-var target: Vector2
+var target
 var is_ready: bool = true
 
 func _process(delta):
@@ -28,8 +28,16 @@ func _process(delta):
 func launch():
 	if ray.is_colliding():
 		launched = true
-		target = ray.get_collision_point()	
-		rope.show()
+		# Store the body the ray hit
+		var colliding_body = ray.get_collider()
+		# Check if the colliding body is a physics body (like a CharacterBody2D or RigidBody2D)
+		if colliding_body is CharacterBody2D or colliding_body is RigidBody2D:
+			target = colliding_body
+			rope.show()
+		else:
+			# If it's a static body (like a wall), just store the collision point
+			target = ray.get_collision_point()
+			rope.show()
 		
 func retract():
 	# Only apply jump force if we were actually grappling
@@ -41,8 +49,15 @@ func retract():
 	rope.hide()
 	
 func handle_grapple(delta):
-	var target_dir = player.global_position.direction_to(target)
-	var target_dist = player.global_position.distance_to(target)
+	# If the target is a moving body, update the grapple point to its current position
+	var grapple_point
+	if target is Node2D:
+		grapple_point = target.global_position
+	else:
+		grapple_point = target
+
+	var target_dir = player.global_position.direction_to(grapple_point)
+	var target_dist = player.global_position.distance_to(grapple_point)
 	
 	var displacement = target_dist - rest_length
 	var force = Vector2.ZERO
@@ -61,7 +76,14 @@ func handle_grapple(delta):
 	update_rope()
 
 func update_rope():
-	rope.set_point_position(1,to_local(target))
+	# Also update the rope's end point
+	var grapple_point
+	if target is Node2D:
+		grapple_point = target.global_position
+	else:
+		grapple_point = target
+	
+	rope.set_point_position(1, to_local(grapple_point))
 
 
 func _on_timer_timeout() -> void:

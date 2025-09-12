@@ -1,34 +1,109 @@
-[gd_scene load_steps=12 format=3 uid="uid://050fh0mgwxrh"]
+[gd_scene load_steps=23 format=3 uid="uid://050fh0mgwxrh"]
 
 [ext_resource type="Script" uid="uid://cw6cl20h6dkfo" path="res://Scenes/scripts/character_body_2d.gd" id="1_dm0xv"]
-[ext_resource type="Texture2D" uid="uid://s6xm3awwlcl6" path="res://Sprites/player/cyborg/Biker_idle.png" id="2_a8sby"]
+[ext_resource type="Texture2D" uid="uid://cvpx34uh4wvn3" path="res://Sprites/player/dude/Dude_Monster_Idle_4.png" id="2_67j28"]
+[ext_resource type="Texture2D" uid="uid://dkel4x0yfbmg8" path="res://Sprites/player/dude/Dude_Monster_Jump_8.png" id="3_k3j84"]
 [ext_resource type="Script" uid="uid://cca8byf31pi57" path="res://Scenes/scripts/grapple_controller.gd" id="3_nbi4f"]
+[ext_resource type="Texture2D" uid="uid://chtm0hsx1gyex" path="res://Sprites/player/dude/Dude_Monster_Run_6.png" id="3_ofm4f"]
 [ext_resource type="PackedScene" uid="uid://bt6e4a68hll7c" path="res://Scenes/gun.tscn" id="4_a8sby"]
 [ext_resource type="PackedScene" uid="uid://jttm5vy30tnl" path="res://Scenes/health_bar.tscn" id="5_67j28"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dm0xv"]
-size = Vector2(17, 32.5)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_67j28"]
-atlas = ExtResource("2_a8sby")
-region = Rect2(98, 11, 23, 37)
+size = Vector2(15, 26)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ofm4f"]
-atlas = ExtResource("2_a8sby")
-region = Rect2(144, 11, 23, 37)
+atlas = ExtResource("2_67j28")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3j84"]
+atlas = ExtResource("2_67j28")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0med"]
+atlas = ExtResource("2_67j28")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bphjq"]
+atlas = ExtResource("2_67j28")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_my16r"]
+atlas = ExtResource("3_k3j84")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vt5t"]
+atlas = ExtResource("3_ofm4f")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ypi3"]
+atlas = ExtResource("3_ofm4f")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdo16"]
+atlas = ExtResource("3_ofm4f")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0nwd"]
+atlas = ExtResource("3_ofm4f")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3a7eg"]
+atlas = ExtResource("3_ofm4f")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53idx"]
+atlas = ExtResource("3_ofm4f")
+region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bphjq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_67j28")
+"texture": SubResource("AtlasTexture_ofm4f")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ofm4f")
+"texture": SubResource("AtlasTexture_k3j84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0med")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bphjq")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_my16r")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vt5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ypi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdo16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0nwd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3a7eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53idx")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
 }]
 
 [sub_resource type="Animation" id="Animation_67j28"]
@@ -45,7 +120,7 @@ collision_mask = 3
 script = ExtResource("1_dm0xv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1.75)
+position = Vector2(0.5, 3)
 shape = SubResource("RectangleShape2D_dm0xv")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
@@ -53,6 +128,7 @@ position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_bphjq")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.582759
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -60,7 +136,7 @@ libraries = {
 }
 
 [node name="Grapple_Controller" type="Node2D" parent="."]
-position = Vector2(-5, 6)
+position = Vector2(-5, 10)
 script = ExtResource("3_nbi4f")
 
 [node name="RayCast2D" type="RayCast2D" parent="Grapple_Controller"]
@@ -76,13 +152,13 @@ wait_time = 0.3
 one_shot = true
 
 [node name="Gun" parent="." instance=ExtResource("4_a8sby")]
-position = Vector2(2, -8)
+position = Vector2(7, -3)
 
 [node name="Hit_timer" type="Timer" parent="."]
 wait_time = 0.5
 
 [node name="HealthBar" parent="." instance=ExtResource("5_67j28")]
-position = Vector2(-8, -21)
+position = Vector2(-9, -16)
 
 [connection signal="timeout" from="Grapple_Controller/Timer" to="Grapple_Controller" method="_on_timer_timeout"]
 [connection signal="timeout" from="Hit_timer" to="." method="_on_hit_timer_timeout"]

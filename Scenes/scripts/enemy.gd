@@ -18,6 +18,7 @@ func _physics_process(delta: float) -> void:
 	
 	if moving_right < 0:
 		velocity.x = SPEED * -1
+		
 		$AnimatedSprite2D.flip_h = true
 		$RayCast2D.target_position = Vector2(-50,50)
 	else:
