@@ -3,7 +3,7 @@ extends Node2D
 @export var rest_length = 2.0
 @export var stiffness = 10.0
 @export var damping = 2.0
-@export var jump_force = 200.0 # Jump force added
+@export var jump_force = 250.0 # Jump force added
 
 @onready var ray := $RayCast2D
 @onready var player := get_parent()
