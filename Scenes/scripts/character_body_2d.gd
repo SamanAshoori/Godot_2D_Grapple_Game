@@ -5,27 +5,13 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -550.0
 const ACCELERATION = 0.1
 const DECELERATION = 0.1
+var is_hurt = false
 @onready var Sprite = $Sprite2D
 func _physics_process(delta: float) -> void:
-	
-	#get mouse_pos
-	var mouse_pos = get_global_mouse_position()
-	
-	if mouse_pos.x > global_position.x:
-		#mouse on right
-		$Gun.position = Vector2(7, -7)
-		Sprite.flip_h = false
-	else:
-		$Gun.position = Vector2(-14, -7)
-		Sprite.flip_h = true
-		
-	
-	
 	# Add the gravity.
 	if not is_on_floor():
-		Sprite.play('jump')
 		velocity += get_gravity() * delta
-		
+
 	#Handle 0 Health
 	if Health == 0:
 		kill_player()
@@ -40,24 +26,37 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("move_left", "move_right")
 	if direction:
 		velocity.x = lerp(velocity.x, SPEED * direction,ACCELERATION)
-		if velocity.x > 0:
-			Sprite.play("run")
-			$Gun.position = Vector2(7, -7)
-			Sprite.flip_h = false
-		else:
-			Sprite.play("run")
-			$Gun.position = Vector2(-14, -7)
-			Sprite.flip_h = true
+	else:
+		velocity.x =lerp(velocity.x, 0.0 ,DECELERATION)
+
+	# --- Animation logic is now separate ---
+	if is_hurt:
+		Sprite.play("hurt")
+	elif not is_on_floor():
+		Sprite.play('jump')
+	elif direction:
+		Sprite.play("run")
 	else:
 		Sprite.play('idle')
-		velocity.x =lerp(velocity.x, 0.0 ,DECELERATION)
-	
-	
+
+	# Handle sprite flipping and gun position based on mouse or movement
+	# get mouse_pos
+	var mouse_pos = get_global_mouse_position()
+
+	if mouse_pos.x > global_position.x:
+		#mouse on right
+		$Gun.position = Vector2(7, -7)
+		Sprite.flip_h = false
+	else:
+		$Gun.position = Vector2(-14, -7)
+		Sprite.flip_h = true
+
 	move_and_slide()
-	
+
 func player_hit():
-	Health -= 10;
-	$".".set_modulate('RED')
+	Health -= 10
+	is_hurt = true
+	#$".".set_modulate('RED')
 	print(Health)
 	$Hit_timer.start()
 
@@ -69,8 +68,13 @@ func kill_player():
 
 func _on_death_zone_body_entered(body: Node2D) -> void:
 	kill_player()
-	
 
 
 func _on_hit_timer_timeout() -> void:
+	is_hurt = false
 	$".".set_modulate('#ffffff') # Replace with function body.
+
+
+func _on_sprite_2d_animation_finished() -> void:
+	if Sprite.get_animation() == "hurt":
+		is_hurt = false

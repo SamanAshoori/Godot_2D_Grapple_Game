@@ -1,7 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://050fh0mgwxrh"]
+[gd_scene load_steps=37 format=3 uid="uid://050fh0mgwxrh"]
 
 [ext_resource type="Script" uid="uid://cw6cl20h6dkfo" path="res://Scenes/scripts/character_body_2d.gd" id="1_dm0xv"]
 [ext_resource type="Texture2D" uid="uid://cvpx34uh4wvn3" path="res://Sprites/player/dude/Dude_Monster_Idle_4.png" id="2_67j28"]
+[ext_resource type="Texture2D" uid="uid://bab8sbasmyagf" path="res://Sprites/player/dude/Dude_Monster_Death_8.png" id="2_bphjq"]
+[ext_resource type="Texture2D" uid="uid://bvcciljabko1f" path="res://Sprites/player/dude/Dude_Monster_Hurt_4.png" id="3_7vt5t"]
 [ext_resource type="Texture2D" uid="uid://dkel4x0yfbmg8" path="res://Sprites/player/dude/Dude_Monster_Jump_8.png" id="3_k3j84"]
 [ext_resource type="Script" uid="uid://cca8byf31pi57" path="res://Scenes/scripts/grapple_controller.gd" id="3_nbi4f"]
 [ext_resource type="Texture2D" uid="uid://chtm0hsx1gyex" path="res://Sprites/player/dude/Dude_Monster_Run_6.png" id="3_ofm4f"]
@@ -10,6 +12,54 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dm0xv"]
 size = Vector2(15, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fo2p"]
+atlas = ExtResource("2_bphjq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smf2g"]
+atlas = ExtResource("2_bphjq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1ylh"]
+atlas = ExtResource("2_bphjq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwo0a"]
+atlas = ExtResource("2_bphjq")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76uhm"]
+atlas = ExtResource("2_bphjq")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ibel"]
+atlas = ExtResource("2_bphjq")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcdjo"]
+atlas = ExtResource("2_bphjq")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7n8d"]
+atlas = ExtResource("2_bphjq")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cvvl"]
+atlas = ExtResource("3_7vt5t")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmck6"]
+atlas = ExtResource("3_7vt5t")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x21xs"]
+atlas = ExtResource("3_7vt5t")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd48x"]
+atlas = ExtResource("3_7vt5t")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ofm4f"]
 atlas = ExtResource("2_67j28")
@@ -57,6 +107,52 @@ region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bphjq"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fo2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smf2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1ylh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwo0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76uhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ibel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcdjo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7n8d")
+}],
+"loop": true,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cvvl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmck6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x21xs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd48x")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ofm4f")
@@ -126,9 +222,9 @@ shape = SubResource("RectangleShape2D_dm0xv")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_bphjq")
-animation = &"idle"
+animation = &"hurt"
 autoplay = "idle"
-frame_progress = 0.582759
+frame_progress = 0.67016
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -155,10 +251,11 @@ one_shot = true
 position = Vector2(7, -3)
 
 [node name="Hit_timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 
 [node name="HealthBar" parent="." instance=ExtResource("5_67j28")]
 position = Vector2(-9, -16)
 
+[connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Grapple_Controller/Timer" to="Grapple_Controller" method="_on_timer_timeout"]
 [connection signal="timeout" from="Hit_timer" to="." method="_on_hit_timer_timeout"]
