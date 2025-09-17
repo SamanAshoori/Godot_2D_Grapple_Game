@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://raiyvhryijyp"]
+
+[ext_resource type="Texture2D" uid="uid://c6ufmloihfsv7" path="res://Sprites/collectible/blueCrystal.png" id="1_d4oix"]
+[ext_resource type="Script" uid="uid://cp42f1lo8n50e" path="res://Scenes/scripts/jump_power_up.gd" id="1_vo8my"]
+
+[node name="jump_power_up" type="Node2D"]
+script = ExtResource("1_vo8my")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_d4oix")
