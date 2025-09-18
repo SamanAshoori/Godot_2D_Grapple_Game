@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var Health = 30
 const SPEED = 300.0
-const JUMP_VELOCITY = -550.0
+var JUMP_VELOCITY = -550.0
 const ACCELERATION = 0.1
 const DECELERATION = 0.1
 var is_hurt = false

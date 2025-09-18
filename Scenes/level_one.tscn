@@ -739,6 +739,15 @@ offset_bottom = 314.0
 text = "Collect Rubys To Increase Score"
 label_settings = SubResource("LabelSettings_ys0qe")
 
+[node name="Label2" type="Label" parent="Text"]
+offset_left = 2955.0
+offset_top = -56.0
+offset_right = 3307.0
+offset_bottom = -7.0
+text = "This Crystal increases jump power 3x for
+10 seconds"
+label_settings = SubResource("LabelSettings_ys0qe")
+
 [node name="Enemies" type="Node" parent="."]
 
 [node name="enemy2" parent="Enemies" instance=ExtResource("4_ik1yt")]
@@ -768,6 +777,6 @@ position = Vector2(3941, -788)
 position = Vector2(3811, -1173)
 
 [node name="jump_power_up" parent="." instance=ExtResource("9_ys0qe")]
-position = Vector2(801, 362)
+position = Vector2(3045, 7)
 
 [connection signal="body_entered" from="Death Zone" to="Player_Node" method="_on_death_zone_body_entered"]
