@@ -56,8 +56,7 @@ scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_dwdrk")
 animation = &"idle"
 autoplay = "idle"
-frame = 2
-frame_progress = 0.614442
+frame_progress = 0.45216
 
 [node name="HealthBar" parent="." instance=ExtResource("2_vdags")]
 position = Vector2(-24, -48)
