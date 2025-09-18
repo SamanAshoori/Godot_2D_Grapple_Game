@@ -3,12 +3,13 @@ extends Node2D
 @export var rest_length = 2.0
 @export var stiffness = 10.0
 @export var damping = 2.0
-@export var jump_force = 300.0 # Jump force added
+@export var jump_force = 300.0
 
 @onready var ray := $RayCast2D
 @onready var player := get_parent()
 @onready var rope := $Line2D
 @onready var timer := $Timer
+
 var launched = false
 var target
 var is_ready: bool = true
@@ -28,30 +29,31 @@ func _process(delta):
 func launch():
 	if ray.is_colliding():
 		launched = true
-		# Store the body the ray hit
-		var colliding_body = ray.get_collider()
-		# Check if the colliding body is a physics body (like a CharacterBody2D or RigidBody2D)
-		if colliding_body is CharacterBody2D or colliding_body is RigidBody2D:
-			target = colliding_body
-			rope.show()
+		var collider = ray.get_collider()
+
+		if collider is CharacterBody2D or collider is RigidBody2D:
+			target = collider
 		else:
-			# If it's a static body (like a wall), just store the collision point
 			target = ray.get_collision_point()
-			rope.show()
+
+		rope.show()
 		
 func retract():
-	# Only apply jump force if we were actually grappling
 	if launched:
-		# Set the player's upward velocity
 		player.velocity.y = -jump_force
 		
 	launched = false
+	target = null
 	rope.hide()
 	
 func handle_grapple(delta):
-	# If the target is a moving body, update the grapple point to its current position
 	var grapple_point
-	if target is Node2D:
+
+	if typeof(target) == TYPE_OBJECT:
+		if not is_instance_valid(target):
+			retract()
+			return
+		
 		grapple_point = target.global_position
 	else:
 		grapple_point = target
@@ -69,22 +71,25 @@ func handle_grapple(delta):
 		var vel_dot = player.velocity.dot(target_dir)
 		var damping_force = -damping * vel_dot * target_dir
 		
-		# Add forces together
 		force = spring_force + damping_force
 
 	player.velocity += force * delta
 	update_rope()
 
 func update_rope():
-	# Also update the rope's end point
 	var grapple_point
-	if target is Node2D:
+
+	if typeof(target) == TYPE_OBJECT:
+		if not is_instance_valid(target):
+			rope.hide()
+			return
 		grapple_point = target.global_position
 	else:
 		grapple_point = target
 	
-	rope.set_point_position(1, to_local(grapple_point))
+	if launched:
+		rope.set_point_position(1, to_local(grapple_point))
 
 
 func _on_timer_timeout() -> void:
-	is_ready = true # set ready back to true.
+	is_ready = true
