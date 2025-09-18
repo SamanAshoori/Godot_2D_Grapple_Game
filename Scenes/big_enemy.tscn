@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://goac4qodsqtg"]
+
+[ext_resource type="Texture2D" uid="uid://qcj066v17uwx" path="res://Sprites/enemy_big_sprites/Pink_Monster_Idle_4.png" id="1_d0yqm"]
+[ext_resource type="Script" uid="uid://dg22tsfdor6ct" path="res://Scenes/scripts/big_enemy.gd" id="1_m8xkl"]
+[ext_resource type="PackedScene" uid="uid://jttm5vy30tnl" path="res://Scenes/health_bar.tscn" id="2_vdags"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vdags"]
+radius = 22.0
+height = 76.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8xkl"]
+atlas = ExtResource("1_d0yqm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0ks7"]
+atlas = ExtResource("1_d0yqm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsd0j"]
+atlas = ExtResource("1_d0yqm")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xih60"]
+atlas = ExtResource("1_d0yqm")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dwdrk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8xkl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0ks7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsd0j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xih60")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="Big_Enemy" type="CharacterBody2D"]
+script = ExtResource("1_m8xkl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 3)
+shape = SubResource("CapsuleShape2D_vdags")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_dwdrk")
+animation = &"idle"
+autoplay = "idle"
+frame = 2
+frame_progress = 0.614442
+
+[node name="HealthBar" parent="." instance=ExtResource("2_vdags")]
+position = Vector2(-24, -48)
+scale = Vector2(2.5, 2.5)

@@ -56,7 +56,6 @@ func _physics_process(delta: float) -> void:
 func player_hit():
 	Health -= 10
 	is_hurt = true
-	#$".".set_modulate('RED')
 	print(Health)
 	$Hit_timer.start()
 
@@ -72,7 +71,6 @@ func _on_death_zone_body_entered(body: Node2D) -> void:
 
 func _on_hit_timer_timeout() -> void:
 	is_hurt = false
-	$".".set_modulate('#ffffff') # Replace with function body.
 
 
 func _on_sprite_2d_animation_finished() -> void:

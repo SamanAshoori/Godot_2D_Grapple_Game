@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://don3s8tbj4gwx"]
+[gd_scene load_steps=18 format=3 uid="uid://don3s8tbj4gwx"]
 
 [ext_resource type="PackedScene" uid="uid://050fh0mgwxrh" path="res://Scenes/player_node.tscn" id="1_lvfns"]
 [ext_resource type="Texture2D" uid="uid://olbo8olfp65k" path="res://Sprites/Mine Sprites/3_Mine_Tileset_1_FarBackground.png" id="2_hi7j2"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://g0eiuo385n7l" path="res://audio/Retro Mystic.ogg" id="5_3lrk7"]
 [ext_resource type="PackedScene" uid="uid://crvku4pqpbg36" path="res://Scenes/ruby.tscn" id="6_gni6d"]
 [ext_resource type="Script" uid="uid://j0tm3h3quqsj" path="res://Scenes/scripts/score_tracker.gd" id="6_y3aq0"]
+[ext_resource type="PackedScene" uid="uid://goac4qodsqtg" path="res://Scenes/big_enemy.tscn" id="7_ep8vc"]
 [ext_resource type="PackedScene" uid="uid://raiyvhryijyp" path="res://Scenes/jump_power_up.tscn" id="9_ys0qe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ik1yt"]
@@ -747,6 +748,9 @@ offset_bottom = -7.0
 text = "This Crystal increases jump power 3x for
 10 seconds"
 label_settings = SubResource("LabelSettings_ys0qe")
+
+[node name="Big_Enemy" parent="Text" instance=ExtResource("7_ep8vc")]
+position = Vector2(268, 43)
 
 [node name="Enemies" type="Node" parent="."]
 
