@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var boost_timer = $boost_timer
 var flash_tween: Tween
+var used = false
 
 func _ready() -> void:
 	play_floating_animation()
@@ -23,7 +24,7 @@ func play_floating_animation() -> void:
 #this is to detect player and increase jump boost
 # This function is triggered when a body enters the Area2D.
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group('player'):
+	if body.is_in_group('player') && !used :
 		print('Power_Up On')
 		body.JUMP_VELOCITY = -1500.0
 		boost_timer.start()
@@ -33,6 +34,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			flash_tween.tween_property(body, "modulate", Color.WHITE, 0.25)
 		self.hide()
 		$Area2D.set_monitoring(false)
+		used = true
+		
 
 
 #once boost_timer is gone - it resets jump height and kills jump_velocity

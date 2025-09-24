@@ -15,6 +15,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.kill_enemy()
 		Global.score += 1
 		queue_free()
+	if body.is_in_group('big_enemy'):
+		body.take_damage(10)
+		queue_free()
 		
 	else:
 		queue_free() # Replace with function body. # Replace with function body.

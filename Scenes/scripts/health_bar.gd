@@ -6,3 +6,5 @@ func set_value(value):
 func set_max(value):
 	$ProgressBar.max_value = value
 	
+func set_step(value):
+	$ProgressBar.step = value
