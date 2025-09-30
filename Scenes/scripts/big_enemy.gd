@@ -36,10 +36,12 @@ func _physics_process(delta: float) -> void:
 		velocity.x = SPEED * -1
 		
 		$AnimatedSprite2D.flip_h = true
+		projectile_spawn_point.position = Vector2(-40,0)
 		$RayCast2D.target_position = Vector2(-50,50)
 	else:
 		velocity.x = SPEED * 1
 		$AnimatedSprite2D.flip_h = false
+		projectile_spawn_point.position = Vector2(40,0)
 		$RayCast2D.target_position = Vector2(50,50)
 		
 	$AnimatedSprite2D.play("walk")

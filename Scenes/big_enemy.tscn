@@ -219,7 +219,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="rock_marker" type="Marker2D" parent="."]
-position = Vector2(28, 0)
+position = Vector2(40, 0)
 
 [node name="DetectionZone" type="Area2D" parent="."]
 

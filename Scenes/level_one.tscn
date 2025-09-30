@@ -696,7 +696,7 @@ text = "Score"
 script = ExtResource("6_y3aq0")
 
 [node name="Player_Node" parent="." instance=ExtResource("1_lvfns")]
-position = Vector2(53, 326)
+position = Vector2(2254, -1312)
 
 [node name="main_level_theme" type="AudioStreamPlayer2D" parent="Player_Node"]
 position = Vector2(-83, -351)
@@ -769,7 +769,7 @@ position = Vector2(493, 359)
 position = Vector2(1323, 101)
 
 [node name="Big_Enemy" parent="Enemies" instance=ExtResource("7_ep8vc")]
-position = Vector2(272, 28)
+position = Vector2(2622, -1430)
 
 [node name="Rubies" type="Node" parent="."]
 
