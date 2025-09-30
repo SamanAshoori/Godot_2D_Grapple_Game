@@ -207,3 +207,6 @@ position = Vector2(-24, -48)
 scale = Vector2(2.5, 2.5)
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="Player_Detection" type="RayCast2D" parent="."]
+target_position = Vector2(200, 50)
