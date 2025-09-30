@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://goac4qodsqtg"]
+[gd_scene load_steps=32 format=3 uid="uid://goac4qodsqtg"]
 
 [ext_resource type="Texture2D" uid="uid://qcj066v17uwx" path="res://Sprites/enemy_big_sprites/Pink_Monster_Idle_4.png" id="1_d0yqm"]
 [ext_resource type="Script" uid="uid://dg22tsfdor6ct" path="res://Scenes/scripts/big_enemy.gd" id="1_m8xkl"]
@@ -188,6 +188,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xih60"]
+size = Vector2(643, 464)
+
 [node name="Big_Enemy" type="CharacterBody2D" groups=["big_enemy"]]
 script = ExtResource("1_m8xkl")
 
@@ -209,4 +212,20 @@ scale = Vector2(2.5, 2.5)
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
 [node name="Player_Detection" type="RayCast2D" parent="."]
-target_position = Vector2(200, 50)
+target_position = Vector2(0, 0)
+
+[node name="rock_cooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="rock_marker" type="Marker2D" parent="."]
+position = Vector2(28, 0)
+
+[node name="DetectionZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource("RectangleShape2D_xih60")
+debug_color = Color(0.958312, 0, 0.201756, 0.42)
+
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]

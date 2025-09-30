@@ -1,13 +1,25 @@
 extends CharacterBody2D
 
+const ROCK_SCENE = preload("res://Scenes/rock.tscn")
+@onready var player_detection_ray = $Player_Detection
+@onready var shoot_timer = $rock_cooldown
+@onready var projectile_spawn_point = $rock_marker
 @onready var healthbar = $HealthBar
 const MAX_HEALTH = 100.0
 var health = 100
 var moving_right = 1
 const SPEED = 25
 var canSwitch = true
+var player = null
 
 func _physics_process(delta: float) -> void:
+	
+	if player:
+		player_detection_ray.target_position = to_local(player.global_position)
+		var collider = player_detection_ray.get_collider()
+		if collider == player and shoot_timer.is_stopped():
+			shoot()
+			shoot_timer.start()
 	
 	healthbar.set_value(health)
 	# Add the gravity.
@@ -50,3 +62,21 @@ func take_damage(amount: float) -> void:
 		# Handle death here (e.g., queue_free()).
 		print("Big Enemy died!")
 		queue_free()
+		
+func shoot():
+	var rock = ROCK_SCENE.instantiate()
+	var shoot_direction = (player.global_position - projectile_spawn_point.global_position).normalized()
+	rock.global_position = projectile_spawn_point.global_position
+	rock.direction = shoot_direction
+	get_tree().root.add_child(rock)
+
+
+func _on_detection_zone_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		player = body # Replace with function body.
+
+
+func _on_detection_zone_body_exited(body: Node2D) -> void:
+	# If the body that left is the same one we are tracking, forget it.
+	if body == player:
+		player = null # Replace with function body.

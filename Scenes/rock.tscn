@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqkekdl7oiqot"]
+[gd_scene load_steps=4 format=3 uid="uid://dqkekdl7oiqot"]
 
+[ext_resource type="Script" uid="uid://cihhgcywsgkid" path="res://Scenes/scripts/rock.gd" id="1_5mkji"]
 [ext_resource type="Texture2D" uid="uid://cd2tjbtdr7s87" path="res://Sprites/enemy_big_sprites/Rock1.png" id="1_lgx4v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lgx4v"]
 radius = 4.0
 
-[node name="rock" type="Node2D"]
+[node name="Rock" type="Area2D"]
+script = ExtResource("1_5mkji")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lgx4v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_lgx4v")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_lgx4v")
